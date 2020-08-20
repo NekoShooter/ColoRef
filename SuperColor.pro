@@ -13,5 +13,6 @@ SOURCES += \
 HEADERS += \
     base_RGB/Algoritmo_RGB.h \
     base_RGB/Convertir_a_RGB.h \
+    base_RGB/MACROS.h \
     base_RGB/RGB.h \
     base_RGB/SuperColor.h

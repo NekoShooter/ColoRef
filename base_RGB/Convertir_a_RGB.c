@@ -1,10 +1,8 @@
 #include "Convertir_a_RGB.h"
+#include "MACROS.h"
 
 #define true 1
 #define false 0
-#define INVALIDO 0
-#define OK 1
-#define ERROR -1
 
 
 short seccionar_aBytes(long *decimal,short nBytes){
@@ -12,6 +10,7 @@ short seccionar_aBytes(long *decimal,short nBytes){
     short numero = *decimal ^ saliente;
     *decimal = saliente >> nBytes;
     return numero;}
+
 
 
 
@@ -38,6 +37,7 @@ short De_letra_a_int(char letra){
 
 
 
+
 short Convertir_Entero_A_HexaPuro(long decimal,char *Hexadecimal,short dimencion){
     if(Hexadecimal == INVALIDO || decimal < 0) return INVALIDO;
 
@@ -55,6 +55,7 @@ short Convertir_Entero_A_HexaPuro(long decimal,char *Hexadecimal,short dimencion
 
     if(decimal) return ERROR;
     else        return OK;}
+
 
 
 
@@ -83,7 +84,9 @@ long Convertir_Hexadecimal_A_EnteroPuro(const char *Hexadecimal){
 
 
 
+
 long Convertir_RGB_A_Entero(long r,int g,short b){
+    if(r < 0 || r > 255|| g < 0|| g > 255|| b < 0|| b > 255) return ERROR;
     return b + (g << 8)+(r << 16);}
 
 
@@ -91,17 +94,26 @@ long Convertir_RGB_A_Entero(long r,int g,short b){
 short Convertir_RGB_A_Hexadecimal(short r,short g,short b,char *Hexadecimal, short dimencion){
     return Convertir_Entero_A_HexaPuro(Convertir_RGB_A_Entero(r,g,b),Hexadecimal,dimencion);}
 
+
+
+
 short Convertir_Entero_A_RGB(short *r,short *g,short *b,long Valor){
-    if(Valor < 0) return ERROR;
+    if(Valor > BLANCO || Valor < NEGRO) return ERROR;
     *b = seccionar_aBytes(&Valor,8);
     *g = seccionar_aBytes(&Valor,8);
     *r = seccionar_aBytes(&Valor,8);
     return  OK;}
 
-short Convertir_Hexadecimal_A_RGB(short *r,short *g,short *b,char *Hexadecimal){
+
+
+
+short Convertir_Hexadecimal_A_RGB(short *r,short *g,short *b,const char *Hexadecimal){
     long Valor = Convertir_Hexadecimal_A_EnteroPuro(Hexadecimal);
     if(Valor == ERROR) return ERROR;
     return Convertir_Entero_A_RGB(r,g,b,Valor);}
+
+
+
 
 
 #define RGBaCSS(rgb) rgb * 15/255
@@ -118,6 +130,26 @@ short Convertir_RGB_A_CSS(short r,short g,short b,char *CSS){
             return ERROR;}
     CSS[4] = '\0';
     return OK;}
+
+
+
+
+short Convertir_Entero_A_CSS(char *CSS, long Valor){
+    if(Valor > BLANCO || Valor < NEGRO) return ERROR;
+    short r, g, b;
+    Convertir_Entero_A_RGB(&r, &g, &b, Valor);
+    return Convertir_RGB_A_CSS(r,g,b,CSS);}
+
+
+
+
+short Convertir_Hexadecimal_A_CSS(const char *Hexadecimal, char *CSS){
+    if(Hexadecimal == INVALIDO || CSS == INVALIDO) return ERROR;
+    short r, g, b;
+    if(Convertir_Hexadecimal_A_RGB(&r,&g,&b,Hexadecimal) == ERROR)
+        return  ERROR;
+    return Convertir_RGB_A_CSS(r,g,b,CSS);}
+
 
 
 short Convertir_CSS_A_Hexadecimal(const char *CSS,char *Hexadecimal){
@@ -138,3 +170,24 @@ short Convertir_CSS_A_Hexadecimal(const char *CSS,char *Hexadecimal){
         i += 2;   ++j;}
 
     return  OK;}
+
+
+
+
+short Convertir_CSS_A_RGB(short *r,short *g,short *b,const char *CSS){
+    if(CSS == INVALIDO) return ERROR;
+    char Hexadecimal[8];
+    if(Convertir_CSS_A_Hexadecimal(CSS,Hexadecimal)== ERROR)
+        return  ERROR;
+    return Convertir_Hexadecimal_A_RGB(r,g,b,Hexadecimal);}
+
+
+
+
+long Convertir_CSS_A_Entero(const char *CSS){
+    if(CSS == INVALIDO) return ERROR;
+    char Hexadecimal[8];
+    if(Convertir_CSS_A_Hexadecimal(CSS,Hexadecimal)==ERROR)
+        return ERROR;
+    return Convertir_Hexadecimal_A_EnteroPuro(Hexadecimal);}
+

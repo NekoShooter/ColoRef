@@ -18,9 +18,14 @@ long Convertir_RGB_A_Entero(long r,int g,short b);
 short Convertir_RGB_A_Hexadecimal(short r,short g,short b,char *Hexadecimal, short dimencion);
 
 short Convertir_Entero_A_RGB(short *r,short *g,short *b,long Valor);
-short Convertir_Hexadecimal_A_RGB(short *r,short *g,short *b,char *Hexadecimal);
+short Convertir_Hexadecimal_A_RGB(short *r,short *g,short *b,const char *Hexadecimal);
 
 short Convertir_RGB_A_CSS(short r,short g,short b,char *CSS);
+short Convertir_Entero_A_CSS(char *CSS, long Valor);
+short Convertir_Hexadecimal_A_CSS(const char *Hexadecimal, char *CSS);
+
+long Convertir_CSS_A_Entero(const char *CSS);
+short Convertir_CSS_A_RGB(short *r,short *g,short *b,const char *CSS);
 short Convertir_CSS_A_Hexadecimal(const char *CSS,char *Hexadecimal);
 
 #ifdef __cplusplus
