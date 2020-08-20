@@ -2,6 +2,7 @@
 #define RGB_H
 #include <iostream>
 
+
 class RGB
 {
     public:
@@ -18,31 +19,20 @@ class RGB
         bool operator !=(const RGB &A);
 
         std::string informacion(bool completa = false);
-        RGB operator +(RGB &A);
-        RGB operator -(RGB &A);
         void cambiar(const long &decimal);
         void cambiar(RGB & rgb);
         void cambiar(const std::string &html);
         void cambiar(short rojo,short verde,short azul);
 
-        enum Eleccion{ROJO, VERDE, AZUL, HTML, _CSS};
+        enum Eleccion{ROJO, VERDE, AZUL, HTML, CSS};
 
-        const short obtenerRGB(short elemento = ROJO);
+        short obtenerRGB(short elemento = ROJO);
         std::string obtenerHEX(short elemento = HTML);
 
-        inline const bool EstaVacio(){return vacio;}
+        inline bool EstaVacio(){return vacio;}
         void limpiar();
-        std::string informacion();
 
 
-
-        friend class SuperColor;
-        friend RGB SumaDeRGB(RGB &A,RGB &B);
-        friend RGB sumaBasica(RGB &A,RGB &B);
-        friend RGB sumaCruzada(RGB &A,RGB &B);
-        friend RGB sumaCompuesta(RGB &A,RGB &B,const char *r_R,const char *r_G,const char*r_B);
-        friend RGB RestaDeRGB(RGB &A,RGB &B);
-        friend short ConfirmarColor(RGB &C);
         friend std::ostream &operator <<(std::ostream &o,RGB &Color);
 
     protected:
@@ -59,17 +49,11 @@ class RGB
 
     private:
 
-        void crear_RBG();
-        void crear_HEX(bool invertir = false);
-        void Identificar_tipo();
-        short familia;
-        short composicion;
         long id_Color;
         short R,G,B;
         std::string Hexadecimal;
-        std::string CSS;
-        std::string Notacion_html;
-        bool vacio,Color_valido;
+        std::string _CSS;
+        bool vacio;
 };
 
 std::ostream &operator <<(std::ostream &o,const RGB &Color);

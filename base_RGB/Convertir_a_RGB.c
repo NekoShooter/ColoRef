@@ -39,7 +39,7 @@ short De_letra_a_int(char letra){
 
 
 short Convertir_Entero_A_HexaPuro(long decimal,char *Hexadecimal,short dimencion){
-    if(Hexadecimal == INVALIDO || decimal < 0) return INVALIDO;
+    if(Hexadecimal == INVALIDO || decimal < 0) return ERROR;
 
     short valor;
     short i = dimencion - 2;
