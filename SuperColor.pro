@@ -8,6 +8,7 @@ SOURCES += \
         base_RGB/Convertir_a_RGB.c \
         base_RGB/RGB.cpp \
         base_RGB/SuperColor.cpp \
+        interfaz/Principal.cpp \
         main.cpp
 
 HEADERS += \
@@ -15,4 +16,5 @@ HEADERS += \
     base_RGB/Convertir_a_RGB.h \
     base_RGB/MACROS.h \
     base_RGB/RGB.h \
-    base_RGB/SuperColor.h
+    base_RGB/SuperColor.h \
+    interfaz/Principal.h

@@ -10,18 +10,18 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 */
-#ifndef ALGORITMO_RGB_H
-#define ALGORITMO_RGB_H
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif
 
-short dividir_tono (short Tono, short *Claro, short *Oscuro, double Nivel_Brillo, double Nivel_Oscuro);
-short Brillo_y_Sombra(long Color,long *Brillo, long *Sombra, double Nivel_Brillo, double Nivel_Oscuro);
+#ifndef PRINCIPAL_H
+#define PRINCIPAL_H
 
-#ifdef __cplusplus
-}
-#endif
-#endif // ALGORITMO_RGB_H
+
+void mostrar(char *controlador);
+void gama();
+void *colorea(void *valor);
+void *menu(void *valor);
+void POS (short x, short y);
+void interfaz(char *controlador);
+void licencia();
+void agradecer();
+#endif //PRINCIPAL_H

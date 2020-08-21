@@ -58,40 +58,40 @@ void SuperColor::reiniciar(){
 
     if(hay_original && Original != nullptr){
         delete Original;
-        std::cout<<"Orginal liberado"<<std::endl;
+        //std::cout<<"Orginal liberado"<<std::endl;
         Original = nullptr;}
 
     if(hay_opuesto && Opuesto != nullptr){
         delete Opuesto;
-        std::cout<<"Opuesto liberado"<<std::endl;
+        //std::cout<<"Opuesto liberado"<<std::endl;
         Opuesto = nullptr;}
 
     if(hay_contiguos){
         if(ContiguoA != nullptr){
-            std::cout<<"ContiguoA liberado"<<std::endl;
+            //std::cout<<"ContiguoA liberado"<<std::endl;
             delete ContiguoA; ContiguoA = nullptr;}
 
         if(ContiguoB != nullptr){
-            std::cout<<"ContiguoB liberado"<<std::endl;
+            //std::cout<<"ContiguoB liberado"<<std::endl;
             delete ContiguoB; ContiguoB = nullptr;}}
 
     if(hay_triangulo){
         if(Punta_A != nullptr){
-            std::cout<<"Punta_A liberado"<<std::endl;
+            //std::cout<<"Punta_A liberado"<<std::endl;
             delete Punta_A; Punta_A = nullptr;}
 
         if(Punta_B != nullptr){
-            std::cout<<"Punta_B liberado"<<std::endl;
+            //std::cout<<"Punta_B liberado"<<std::endl;
             delete Punta_B; Punta_B = nullptr;}}
 
     if(hay_gamas && Luz != nullptr){
         delete Luz;
-        std::cout<<"Luz liberado"<<std::endl;
+        //std::cout<<"Luz liberado"<<std::endl;
         Luz = nullptr;}
 
     if(hay_gamas && Sombra != nullptr){
         delete Sombra;
-        std::cout<<"Sombra liberado"<<std::endl;
+        //std::cout<<"Sombra liberado"<<std::endl;
         Sombra = nullptr;}}
 
 void SuperColor::Cambiar(RGB &Color){
@@ -250,7 +250,7 @@ void SuperColor::CreaColores(short eleccion){
     ConstruirColores();}
 
 std::ostream &operator<<(std::ostream &o, SuperColor &c){
-    if(c.estaVacio) return o<<"Color inexistente";
+    if(c.estaVacio) return o<<"Color inexistente"<<std::endl;
     o<<"___color_____css___html____R____G____B___"<<std::endl;
     o<<"  Original  "<<*c.Original;
 
