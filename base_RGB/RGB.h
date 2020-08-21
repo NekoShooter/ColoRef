@@ -32,7 +32,7 @@ class RGB
         inline bool EstaVacio(){return vacio;}
         void limpiar();
 
-
+        friend class SuperColor;
         friend std::ostream &operator <<(std::ostream &o,RGB &Color);
 
     protected:
