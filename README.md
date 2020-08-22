@@ -9,6 +9,7 @@ Inspirada en la [famosa teoría del color](https://es.wikipedia.org/wiki/Teoría
 
 <h2 align="center"> ColoRef --version (monocromo 0.0)<h2/>
   
+
 <p align="center">Esta es una aplicacion de terminal basada en el circulo cromatico cuya funcion es basica, solo ingresas el color de tu preferencia en notacion HTML o CSS y la aplicacion te dara el resultado deseado que hayas elegido:<p/>
 
 <p align="center"><a href="https://es.wikipedia.org/wiki/Color_monocromáticos"><b>Brillo y Sombra (monocomo)<a/><b/><p/>
@@ -20,7 +21,8 @@ Inspirada en la [famosa teoría del color](https://es.wikipedia.org/wiki/Teoría
   
 <p align="center">
 <a href="https://github.com/NekoShooter/ColorRef#-coloref-"><img src="https://media.giphy.com/media/MaP0WVhZJs8oWKdqdW/giphy.gif" alt="creando paleta de colores" ></a>
-<p/>
+<p/>  
+
 
  version | descarga 
   --- | ---
