@@ -4,7 +4,7 @@ Inspirada en la [famosa teoría del color](https://es.wikipedia.org/wiki/Teoría
 
 
 <p align="center">
-<a href="https://github.com/NekoShooter/ColorRef#--versiondescargamonocromo-00exe--codigo"><img src="https://media.giphy.com/media/ifZ65WQ3jUIXCL1asE/giphy.gif" alt="creando paleta de colores" ></a>
+<a href="https://github.com/NekoShooter/ColorRef#ejemplo-de-su-uso-ayudado-del-programa-gimp"><img src="https://media.giphy.com/media/ifZ65WQ3jUIXCL1asE/giphy.gif" alt="creando paleta de colores" ></a>
 <p/>
 
 <h2 align="center"> ColoRef --version monocromo 0.0</h2>
