@@ -127,7 +127,7 @@ void licencia(){
     POS(23,0);
     cout<<"ColoRef";
     POS(16,1);
-    printf("version nomocromo 0.0");
+    printf("version monocromo 0.0");
     POS(13,4);
     printf("GNU: GENERAL PUBLIC LICENSE");
     POS(15,5);
