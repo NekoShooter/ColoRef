@@ -6,7 +6,9 @@ Inspirada en la [famosa teoría del color](https://es.wikipedia.org/wiki/Teoría
 <p align="center">
 <a href="https://github.com/NekoShooter/ColorRef/tree/master/base_RGB"><img src="https://media.giphy.com/media/ifZ65WQ3jUIXCL1asE/giphy.gif" alt="creando paleta de colores" ></a>
 <p/>
+
 <h2 align="center"> ColoRef --version (monocromo 0.0)<h2/>
+  
 <p align="center">Esta es una aplicacion de terminal basada en el <a href="https://es.wikipedia.org/wiki/Círculo_cromático">circulo cromatico<a/> cuya funcion es basica, solo ingresas el color de tu preferencia en notacion HTML o CSS y la aplicacion te dara el resultado deseado que hayas elegido: <p/>
 
 <p align="center"><a href="https://es.wikipedia.org/wiki/Color_monocromáticos"><b>Brillo y Sombra (monocomo)<a/><b/><p/>
@@ -18,7 +20,6 @@ Inspirada en la [famosa teoría del color](https://es.wikipedia.org/wiki/Teoría
 <a href="https://github.com/GNOME/gimp"><img src="https://media.giphy.com/media/MaP0WVhZJs8oWKdqdW/giphy.gif" alt="creando paleta de colores" ></a>
 <p/>
 
-
  version | descarga 
   --- | ---
- monocromo 0.0 | [.exe](https://mega.nz/file/F9QyWYTD#bBITavbsSb0yN5S9Hyp_WZqYMZBNHcvlZ8bTpSyTWa0)
+ monocromo 0.0 | [.exe](https://mega.nz/file/F9QyWYTD#bBITavbsSb0yN5S9Hyp_WZqYMZBNHcvlZ8bTpSyTWa0)       [codigo](https://github.com/NekoShooter/ColorRef/releases/tag/monocromo-v0.0)
