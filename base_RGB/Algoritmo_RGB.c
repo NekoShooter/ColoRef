@@ -22,6 +22,8 @@ short dividir_tono(short Tono, short *Claro, short *Oscuro,double Nivel_Brillo, 
 
 
 short Brillo_y_Sombra(long Color, long *Brillo,long *Sombra,double Nivel_Brillo, double Nivel_Oscuro){
+    if(Color == ERROR) return ERROR;
+
     short RGB_Original[3], i,
           RGB_Brillo  [3],
           RGB_Sombra  [3];

@@ -8,7 +8,7 @@ void RGB::limpiar(){
     R = G = B = 0;
     r = g = b = -1;
 
-    id_Color = 0;
+    id_Color = -1;
 
     Hexadecimal.clear();
     _CSS.clear();

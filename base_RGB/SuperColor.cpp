@@ -3,20 +3,23 @@
 #include "MACROS.h"
 
 void SuperColor::iniciar(){
-    estaVacio     = true;
-    tiene_alfa    = false; Alfa = -1;
+    estaVacio       = true;
+    tiene_alfa      = false; Alfa = -1;
 
-    hay_original  = false; Original  = nullptr;
-    hay_opuesto   = false; Opuesto   = nullptr;
-    hay_contiguos = false; ContiguoA = nullptr;
-                           ContiguoB = nullptr;
-    hay_triangulo = false; Punta_A   = nullptr;
-                           Punta_B   = nullptr;
+    hay_original    = false; Original  = nullptr;
+    hay_opuesto     = false; Opuesto   = nullptr;
 
-    hay_gamas     = false; Luz       = nullptr;
-                           Sombra    = nullptr;
+    hay_contiguo_A  = false; ContiguoA = nullptr;
+    hay_contiguo_B  = false; ContiguoB = nullptr;
 
-    ColoreSelecionados = 0;
+    hay_triangulo_A = false; Punta_A   = nullptr;
+    hay_triangulo_B = false; Punta_B   = nullptr;
+
+    hay_monocromo   = false; Luz       = nullptr;
+                             Sombra    = nullptr;
+    hay_gamas       = false;
+
+    Que_color_Es = 0;
     respaldo = nullptr;}
 
 
@@ -58,41 +61,41 @@ void SuperColor::reiniciar(){
 
     if(hay_original && Original != nullptr){
         delete Original;
-        //std::cout<<"Orginal liberado"<<std::endl;
+        std::cout<<"Orginal liberado"<<std::endl;
         Original = nullptr;}
 
     if(hay_opuesto && Opuesto != nullptr){
         delete Opuesto;
-        //std::cout<<"Opuesto liberado"<<std::endl;
+        std::cout<<"Opuesto liberado"<<std::endl;
         Opuesto = nullptr;}
 
-    if(hay_contiguos){
-        if(ContiguoA != nullptr){
-            //std::cout<<"ContiguoA liberado"<<std::endl;
-            delete ContiguoA; ContiguoA = nullptr;}
+    if(hay_contiguo_A && ContiguoA != nullptr){
+        std::cout<<"ContiguoA liberado"<<std::endl;
+        delete ContiguoA; ContiguoA = nullptr;}
 
-        if(ContiguoB != nullptr){
-            //std::cout<<"ContiguoB liberado"<<std::endl;
-            delete ContiguoB; ContiguoB = nullptr;}}
+    if(hay_contiguo_B && ContiguoB != nullptr){
+        std::cout<<"ContiguoB liberado"<<std::endl;
+        delete ContiguoB; ContiguoB = nullptr;}
 
-    if(hay_triangulo){
-        if(Punta_A != nullptr){
-            //std::cout<<"Punta_A liberado"<<std::endl;
-            delete Punta_A; Punta_A = nullptr;}
+    if(hay_triangulo_A && Punta_A != nullptr){
+        std::cout<<"Punta_A liberado"<<std::endl;
+        delete Punta_A; Punta_A = nullptr;}
 
-        if(Punta_B != nullptr){
-            //std::cout<<"Punta_B liberado"<<std::endl;
-            delete Punta_B; Punta_B = nullptr;}}
+    if(hay_triangulo_B && Punta_B != nullptr){
+        std::cout<<"Punta_B liberado"<<std::endl;
+        delete Punta_B; Punta_B = nullptr;}
 
-    if(hay_gamas && Luz != nullptr){
+    if(hay_monocromo && Luz != nullptr){
         delete Luz;
-        //std::cout<<"Luz liberado"<<std::endl;
+        std::cout<<"Luz liberado"<<std::endl;
         Luz = nullptr;}
 
-    if(hay_gamas && Sombra != nullptr){
+    if(hay_monocromo && Sombra != nullptr){
         delete Sombra;
-        //std::cout<<"Sombra liberado"<<std::endl;
+        std::cout<<"Sombra liberado"<<std::endl;
         Sombra = nullptr;}}
+
+
 
 void SuperColor::Cambiar(RGB &Color){
     if(Color.EstaVacio()) return;
@@ -150,35 +153,61 @@ void SuperColor::ConstruirColores(){
         Opuesto = new RGB;
         *Opuesto = BLANCO - Original->id_Color;}
 
-    if(hay_triangulo){
-        if (Punta_A == nullptr){
-            Punta_A = new RGB;
-            *Punta_A = *Original;
-            Punta_A->Desplazar_RGB_Izq();
-            Punta_A->actualizar_RGB();}
-        if(Punta_B == nullptr){
-            Punta_B = new RGB;
-            *Punta_B = *Original;
-            Punta_B->Desplazar_RGB_Der();
-            Punta_B->actualizar_RGB();}}
+    if (hay_triangulo_A && Punta_A == nullptr){
+        Punta_A = new RGB;
+        *Punta_A = *Original;
+        Punta_A->Desplazar_RGB_Izq();
+        Punta_A->actualizar_RGB();}
 
-    if(hay_contiguos){
-        if(ContiguoA == nullptr){
-            ContiguoA = new RGB;
-            *ContiguoA = BLANCO - Punta_B->id_Color;}
-        if(ContiguoB == nullptr){
-            ContiguoB = new RGB;
-            *ContiguoB = BLANCO - Punta_A->id_Color;}}
+    if (hay_triangulo_B && Punta_B == nullptr){
+        Punta_B = new RGB;
+        *Punta_B = *Original;
+        Punta_B->Desplazar_RGB_Der();
+        Punta_B->actualizar_RGB();}
 
-    if(hay_gamas){
+    if(hay_contiguo_A && ContiguoA == nullptr){
+        ContiguoA = new RGB;
+        *ContiguoA = BLANCO - Punta_B->id_Color;}
+
+    if(hay_contiguo_B && ContiguoB == nullptr){
+        ContiguoB = new RGB;
+        *ContiguoB = BLANCO - Punta_A->id_Color;}
+
+    if(hay_monocromo){
+        long brillo, oscuro;
+        respaldo =Color_selecionado(Que_color_Es);
+        if(!respaldo || Brillo_y_Sombra(respaldo->id_Color,&brillo,&oscuro,.50,.25) == ERROR)
+            return;
         if(Luz == nullptr)
             Luz = new RGB;
         if(Sombra == nullptr)
             Sombra = new RGB;
-        long brillo, oscuro;
-        Brillo_y_Sombra(Original->id_Color,&brillo,&oscuro,.50,.25);
         *Luz = brillo;
         *Sombra = oscuro;}}
+
+RGB *SuperColor::Color_selecionado(short color){
+    if(estaVacio) return nullptr;
+
+    switch(color){
+        case ORIGINAL:
+            return Original;
+
+        case COMPLEMENTO:
+            return Opuesto;
+
+        case ANALOGO_A:
+            return ContiguoA;
+
+        case ANALOGO_B:
+            return ContiguoB;
+
+        case TRIANGULO_A:
+            return Punta_A;
+
+        case TRIANGULO_B:
+            return Punta_B;
+
+        default: return nullptr;}}
 
 
 void SuperColor::limpiar(){
@@ -187,66 +216,36 @@ void SuperColor::limpiar(){
 
 std::string SuperColor::Obterner(const short &Tono, const short &Modo){
     if(estaVacio) return "";
-    switch(Tono){
-        case ORIGINAL:
-            return Original->obtenerHEX(Modo);
-
-        case COMPLEMENTO:
-            hay_opuesto = true;
-            ConstruirColores();
-            return Opuesto->obtenerHEX(Modo);
-
-        case ANALOGO_A:
-            hay_triangulo = true;
-            hay_contiguos = true;
-            ConstruirColores();
-            return ContiguoA->obtenerHEX(Modo);
-        case ANALOGO_B:
-            hay_triangulo = true;
-            hay_contiguos = true;
-            ConstruirColores();
-            return ContiguoB->obtenerHEX(Modo);
-
-        case TRIANGULO_A:
-            hay_triangulo = true;
-            ConstruirColores();
-            return Punta_A->obtenerHEX(Modo);
-
-        case TRIANGULO_B:
-            hay_triangulo = true;
-            ConstruirColores();
-            return Punta_B->obtenerHEX(Modo);
-
-        case BRILLO:
-            hay_gamas = true;
-            ConstruirColores();
-            return Luz->obtenerHEX(Modo);
-        case SOMBRA:
-            hay_gamas = true;
-            ConstruirColores();
-            return Sombra->obtenerHEX(Modo);
-
-        default:
-            return "";}}
+    respaldo = Color_selecionado(Tono);
+    if(respaldo)
+        return respaldo->obtenerHEX(Modo);
+    return "";}
 
 
-void SuperColor::CreaColores(short eleccion){
-    if(estaVacio|| eleccion < 1 || eleccion > 15) return;
-    ColoreSelecionados = eleccion;
+void SuperColor::CreaColores(short eleccion,short extra){
+    if(estaVacio|| eleccion < 0 || eleccion > 31 ) return;
+
+    Que_color_Es = eleccion;
 
     if(eleccion & COMPLEMENTO)
         hay_opuesto   = true;
 
-    if(eleccion & ANALOGO){
-        hay_contiguos = true;
-        hay_triangulo = true;}
+    if(eleccion & ANALOGO_A){
+        hay_contiguo_A = true;
+        hay_triangulo_B = true;}
 
-    if(eleccion & TRIADA)
-        hay_triangulo = true;
+    if(eleccion & ANALOGO_B){
+        hay_contiguo_B = true;
+        hay_triangulo_A = true;}
 
-    if(eleccion & GAMAS)
-        hay_gamas= true;
+    if(eleccion & TRIANGULO_A)
+        hay_triangulo_A = true;
 
+    if(eleccion & TRIANGULO_B)
+        hay_triangulo_B = true;
+
+    if(extra == MONOCROMO)
+        hay_monocromo = true;
     ConstruirColores();}
 
 std::ostream &operator<<(std::ostream &o, SuperColor &c){
@@ -254,19 +253,25 @@ std::ostream &operator<<(std::ostream &o, SuperColor &c){
     o<<"___color_____css___html____R____G____B___"<<std::endl;
     o<<"  Original  "<<*c.Original;
 
-    if((c.ColoreSelecionados & c.GAMAS) && c.hay_gamas){
+    if(c.hay_monocromo && c.Luz)
         o<<"   Brillo   "<<*c.Luz;
-        o<<"   Sombra   "<<*c.Sombra;}
 
-    if((c.ColoreSelecionados & c.COMPLEMENTO) && c.hay_opuesto)
+    if(c.hay_monocromo && c.Sombra)
+        o<<"   Sombra   "<<*c.Sombra;
+
+    if((c.Que_color_Es & c.COMPLEMENTO) && c.hay_opuesto)
         o<<"Complemento "<<*c.Opuesto;
 
-    if((c.ColoreSelecionados & c.ANALOGO) && c.hay_contiguos){
+    if((c.Que_color_Es & c.ANALOGO_A) && c.hay_contiguo_A)
         o<<"Adyasente A "<<*c.ContiguoA;
-        o<<"  - - -   B "<<*c.ContiguoB;}
 
-    if((c.ColoreSelecionados & c.TRIADA) && c.hay_triangulo){
+    if((c.Que_color_Es & c.ANALOGO_B) && c.hay_contiguo_B)
+        o<<"Adyasente B "<<*c.ContiguoB;
+
+    if((c.Que_color_Es & c.TRIANGULO_A) && c.hay_triangulo_A)
         o<<"  Triada  A "<<*c.Punta_A;
-        o<<"  - - -   B "<<*c.Punta_B;}
+
+    if((c.Que_color_Es & c.TRIANGULO_B) && c.hay_triangulo_B)
+        o<<"  Triada  B "<<*c.Punta_B;
 
     return o;}

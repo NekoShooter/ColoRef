@@ -38,23 +38,25 @@ class SuperColor
                      const short &azul,const short alfa = 255);
         void Cambiar(long decimal);
 
-        void CreaColores(short eleccion = TODO);
+        void CreaColores(short eleccion = TODO,short extra = 0);
         void limpiar();
-        enum Seleccion{ORIGINAL    = 0, TRIADA  = 4,
-                       COMPLEMENTO = 1, ANALOGO = 2,
-                                        GAMAS   = 8,
-                                        TODO    = 15,
+        enum Seleccion{ORIGINAL    = 0,     TRIADA  = 24,
+                       COMPLEMENTO = 1,     ANALOGO = 6,
 
-                       ANALOGO_A,       HTML, CSS,
-                       ANALOGO_B,
+                       ANALOGO_A = 2,       TODO = 31,
+                       ANALOGO_B = 4,       HTML, CSS,
 
-                       TRIANGULO_A,     SOMBRA,
-                       TRIANGULO_B,     BRILLO,};
+                       TRIANGULO_A = 8,     SOMBRA,
+                       TRIANGULO_B = 16,    BRILLO};
+
+        enum Opciones{ NONE,MONOCROMO,GAMA
+           };
 
         bool EstaVacio(){return estaVacio;}
         friend std::ostream &operator<<(std::ostream &o, SuperColor &c);
 
     private:
+        RGB * Color_selecionado(short color);
         void ConstruirColores();
         void iniciar();
         void reiniciar();
@@ -64,13 +66,16 @@ class SuperColor
             *Luz,       *Sombra,
             *respaldo;
 
-        short Alfa,ColoreSelecionados;
+        short Alfa,Que_color_Es;
 
         bool estaVacio,  hay_original,
              tiene_alfa, hay_opuesto,
-                         hay_contiguos,
+
+        hay_contiguo_A,  hay_triangulo_A,
+        hay_contiguo_B,  hay_triangulo_B,
+
                          hay_gamas,
-                         hay_triangulo;
+                         hay_monocromo;
 };
 
 #endif // SUPERCOLOR_H

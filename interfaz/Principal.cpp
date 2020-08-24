@@ -95,7 +95,7 @@ void interfaz(char *controlador){
             printf("obtener todo[5]\n");
             scanf("%s",controlador);
             switch (*controlador) {
-                case '1': ColordelUsuario.CreaColores(SuperColor::GAMAS);
+                case '1': ColordelUsuario.CreaColores(SuperColor::TODO,SuperColor::MONOCROMO);
                         break;
                 case '2': ColordelUsuario.CreaColores(SuperColor::COMPLEMENTO);
                         break;
@@ -147,10 +147,10 @@ void agradecer(){
         /                        :`\n\
        :`                     \\    :`\n\
       :`        \\ .  |`,  \\    \\     \\\n\
-     /      |  / V\  |  \.`\\    \\     \\\n\
+     /      |  / V\\  |  \\.`\\    \\     \\\n\
     /^.     ` /__. `.| --`  \\|        |\n\
       |    ^.V          ,==, |  ;\\  |\\|\n\
-      |^.   \ ,==,        `` | /^/  | `\n\
+      |^.   \\ ,==,        `` | /^/  | `\n\
         |    | ``   `        |/-^  /\n\
         |^ ^.:,    /[\\--`  ,*--. /V\n\
           V   V`--/ `.\\--<`/    V\n\
