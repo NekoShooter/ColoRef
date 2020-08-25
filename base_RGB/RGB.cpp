@@ -5,7 +5,7 @@
 #include "MACROS.h"
 
 void RGB::limpiar(){
-    R = G = B = 0;
+    R = G = B = NEGRO;
     r = g = b = -1;
 
     id_Color = -1;
@@ -83,7 +83,9 @@ void RGB::cambiar(RGB & rgb){
     R = rgb.R;
     G = rgb.G;
     B = rgb.B;
-    cambiar(R,G,B);}
+    id_Color = rgb.id_Color;
+    Hexadecimal = rgb.Hexadecimal;
+    _CSS = rgb._CSS;}
 
 
 

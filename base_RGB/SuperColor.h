@@ -38,19 +38,19 @@ class SuperColor
                      const short &azul,const short alfa = 255);
         void Cambiar(long decimal);
 
-        void CreaColores(short eleccion = TODO,short extra = 0);
+        void Re_Asignar(short eleccion);
+        void Luminicencia(short seleccion = ORIGINAL,short nivel = 3,bool aplicar = false);
+
+        void CreaColores(short eleccion = TODO,short extra = NINGUNO);
         void limpiar();
-        enum Seleccion{ORIGINAL    = 0,     TRIADA  = 24,
-                       COMPLEMENTO = 1,     ANALOGO = 6,
+        enum Seleccion{ORIGINAL    = 0,     TRIADA  = 24, GAMA = 32,
+                       COMPLEMENTO = 1,     ANALOGO = 6,  NINGUNO = 0,
 
-                       ANALOGO_A = 2,       TODO = 31,
-                       ANALOGO_B = 4,       HTML, CSS,
+                       ANALOGO_A   = 2,     TODO = 63,
+                       ANALOGO_B   = 4,     HTML, CSS,
 
-                       TRIANGULO_A = 8,     SOMBRA,
-                       TRIANGULO_B = 16,    BRILLO};
-
-        enum Opciones{ NONE,MONOCROMO,GAMA
-           };
+                       TRIANGULO_A = 8,     MONOCROMO = 64,
+                       TRIANGULO_B = 16,    INTRAQUEABLE};
 
         bool EstaVacio(){return estaVacio;}
         friend std::ostream &operator<<(std::ostream &o, SuperColor &c);
@@ -58,24 +58,29 @@ class SuperColor
     private:
         RGB * Color_selecionado(short color);
         void ConstruirColores();
+        bool Eleccion(short eleccion);
+        void ConstruirGamas();
         void iniciar();
         void reiniciar();
+
         RGB *Original,  *Opuesto,
             *ContiguoA, *ContiguoB,
             *Punta_A,   *Punta_B,
             *Luz,       *Sombra,
-            *respaldo;
+            *respaldo,  **Gamas;
 
-        short Alfa,Que_color_Es;
+        short Alfa,            Seguro,
+              NumeroDE_Gamas,  Que_color_Es,
+              ColorGama,       ColorMonocromo;
 
-        bool estaVacio,  hay_original,
-             tiene_alfa, hay_opuesto,
+        bool estaVacio,       hay_original,
+             tiene_alfa,      hay_opuesto,
 
-        hay_contiguo_A,  hay_triangulo_A,
-        hay_contiguo_B,  hay_triangulo_B,
+             hay_contiguo_A,  hay_triangulo_A,
+             hay_contiguo_B,  hay_triangulo_B,
 
-                         hay_gamas,
-                         hay_monocromo;
+             hay_gamas,       hay_monocromo,
+             es_todo;
 };
 
 #endif // SUPERCOLOR_H

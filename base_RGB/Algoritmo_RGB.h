@@ -21,6 +21,9 @@ extern "C"
 short dividir_tono (short Tono, short *Claro, short *Oscuro, double Nivel_Brillo, double Nivel_Oscuro);
 short Brillo_y_Sombra(long Color,long *Brillo, long *Sombra, double Nivel_Brillo, double Nivel_Oscuro);
 
+long Suma_deColor(long ColorA, long ColorB,short desplazamiento);
+long Nivel_de_Luminicencia(long Color,short intencidad);
+
 #ifdef __cplusplus
 }
 #endif

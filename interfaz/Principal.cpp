@@ -77,8 +77,7 @@ void *menu(void *valor){
             licencia();}
         else{
             system("cls");
-            break; }}
-}
+            break; }}}
 
 void interfaz(char *controlador){
     system("color 0F");

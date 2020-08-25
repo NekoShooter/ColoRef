@@ -21,5 +21,10 @@ GNU General Public License for more details.
 
 #define BLANCO 16777215
 #define NEGRO 0
+#define CONST_ARTE 2.0
+
+#define CENTRO 0
+#define DERECHA 1
+#define IZQUIERDA 2
 
 #endif // MACROS_H

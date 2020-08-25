@@ -40,6 +40,7 @@ class RGB
 
         short obtenerRGB(short elemento = ROJO);
         std::string obtenerHEX(short elemento = HTML);
+        inline long obtenerID(){return id_Color;}
 
         inline bool EstaVacio(){return vacio;}
         void limpiar();

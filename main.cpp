@@ -1,5 +1,4 @@
 #include "interfaz/Principal.h"
-
 int main()
 {
     char controlador[100];
