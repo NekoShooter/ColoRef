@@ -67,10 +67,9 @@ long Suma_deColor(long ColorA, long ColorB,short desplazamiento){
     return (BLANCO - Convertir_RGB_A_Entero(rgb_C[0],rgb_C[1],rgb_C[2]));}
 
 
-
 long Nivel_de_Luminicencia(long Color,short intencidad){
     if(Color < NEGRO) return ERROR;
-    short r,g,b;
+    short r, g, b;
     if(Convertir_Entero_A_RGB(&r,&g,&b,Color)== ERROR)
         return ERROR;
     b += intencidad;

@@ -1,6 +1,8 @@
 #include "SuperColor.h"
 #include "Algoritmo_RGB.h"
 #include "MACROS.h"
+//#include <iostream>
+
 
 void SuperColor::iniciar(){
     estaVacio       = true;
@@ -21,10 +23,7 @@ void SuperColor::iniciar(){
     es_todo         = false;
 
     Que_color_Es   = NINGUNO;
-
-    ColorGama      = ORIGINAL;
-    ColorMonocromo = ORIGINAL;
-
+    ColorMonocromo = NINGUNO;
     respaldo = nullptr;}
 
 
@@ -35,13 +34,16 @@ SuperColor::SuperColor(RGB &Color){
     iniciar();
     Cambiar(Color);}
 
+
 SuperColor::SuperColor(long decimal){
     iniciar();
     Cambiar(decimal);}
 
+
 SuperColor::SuperColor(const std::string &html){
     iniciar();
     Cambiar(html);}
+
 
 SuperColor::SuperColor(const short &rojo,const short &verde,
                        const short &azul,const short alfa){
@@ -49,17 +51,78 @@ SuperColor::SuperColor(const short &rojo,const short &verde,
     if(alfa < 0 || alfa > 255) return;
     Cambiar(rojo,verde,azul);}
 
-void SuperColor::operator=(const std::string &html){
-    Cambiar(html);}
 
 void SuperColor::operator=(RGB &Color){
     Cambiar(Color);}
 
+
 void SuperColor::operator=(long decimal){
     Cambiar(decimal);}
 
+
+void SuperColor::operator=(const std::string &html){
+    Cambiar(html);}
+
+
 SuperColor::~SuperColor(){
     limpiar();}
+
+
+void SuperColor::Cambiar(RGB &Color){
+    if(Color.EstaVacio()) return;
+    reiniciar();
+    Original = new RGB(Color);
+    hay_original = true;
+    estaVacio = false;
+    ConstruirColores();}
+
+
+
+void SuperColor::Cambiar(long decimal){
+    respaldo = new RGB(decimal);
+    if(respaldo->EstaVacio()){
+        delete respaldo;
+        return;}
+    reiniciar();
+    Original = respaldo;
+    Alfa = 255;
+    hay_original = true;
+    estaVacio = false;
+    ConstruirColores();}
+
+
+
+void SuperColor::Cambiar(const std::string &html){
+    respaldo = new RGB(html);
+
+    if(respaldo->EstaVacio()){
+        delete respaldo;
+        return;    }
+    else{
+        reiniciar();
+        Original = respaldo;
+        hay_original = true;
+        estaVacio = false;
+        ConstruirColores();}}
+
+
+void SuperColor::Cambiar(const short &rojo,const short &verde,
+                         const short &azul,const short alfa){
+    respaldo = new RGB(rojo,verde,azul);
+    if(respaldo->EstaVacio()){
+        delete respaldo;
+        return;}
+    else{
+        reiniciar();
+        Original = respaldo;
+        hay_original = true;
+        estaVacio = false;
+        ConstruirColores();
+        Alfa = alfa;
+        if(alfa != 255)
+            tiene_alfa = true;}}
+
+
 
 void SuperColor::reiniciar(){
     if(estaVacio) return;
@@ -109,74 +172,36 @@ void SuperColor::reiniciar(){
         Gamas = nullptr;}}
 
 
+void SuperColor::CreaColores(short eleccion,short extra){
+    if(estaVacio|| eleccion < 0 || eleccion > TODO ) return;
 
-void SuperColor::Cambiar(RGB &Color){
-    if(Color.EstaVacio()) return;
-    reiniciar();
-    Original = new RGB(Color);
-    hay_original = true;
-    estaVacio = false;
-    ConstruirColores();}
+    if(eleccion & COMPLEMENTO)
+        hay_opuesto   = true;
 
-void SuperColor::Cambiar(const std::string &html){
-    respaldo = new RGB(html);
+    if(eleccion & ANALOGO_A){
+        hay_contiguo_A = true;
+        hay_triangulo_B = true;}
 
-    if(respaldo->EstaVacio()){
-        delete respaldo;
-        return;    }
-    else{
-        reiniciar();
-        Original = respaldo;
-        hay_original = true;
-        estaVacio = false;
+    if(eleccion & ANALOGO_B){
+        hay_contiguo_B = true;
+        hay_triangulo_A = true;}
+
+    if(eleccion & TRIANGULO_A)
+        hay_triangulo_A = true;
+
+    if(eleccion & TRIANGULO_B)
+        hay_triangulo_B = true;
+
+    if(eleccion & GAMA)
+        hay_gamas = true;
+
+    if(extra == MONOCROMO){
+        ColorMonocromo = eleccion;
+        hay_monocromo = true;}
+
+    if(extra != INTRAQUEABLE){
+        Que_color_Es = eleccion;
         ConstruirColores();}}
-
-void SuperColor::Cambiar(const short &rojo,const short &verde,
-                         const short &azul,const short alfa){
-    respaldo = new RGB(rojo,verde,azul);
-    if(respaldo->EstaVacio()){
-        delete respaldo;
-        return;}
-    else{
-        reiniciar();
-        Original = respaldo;
-        hay_original = true;
-        estaVacio = false;
-        ConstruirColores();
-        Alfa = alfa;
-        if(alfa != 255)
-            tiene_alfa = true;}}
-
-void SuperColor::Cambiar(long decimal){
-    respaldo = new RGB(decimal);
-    if(respaldo->EstaVacio()){
-        delete respaldo;
-        return;}
-    reiniciar();
-    Original = respaldo;
-    Alfa = 255;
-    hay_original = true;
-    estaVacio = false;
-    ConstruirColores();}
-
-bool SuperColor:: Eleccion(short eleccion){
-    if(eleccion < NEGRO) return false;
-    respaldo = Color_selecionado(eleccion);
-    if(es_todo) return false;
-    if(respaldo == nullptr){
-        CreaColores(eleccion,INTRAQUEABLE);
-        ConstruirColores();
-        respaldo = Color_selecionado(eleccion);
-        return true;}}
-
-void SuperColor::Re_Asignar(short eleccion){
-    if(!Eleccion(eleccion))return;
-    Cambiar(respaldo->id_Color);}
-
-void SuperColor::Luminicencia(short seleccion,short nivel,bool aplicar){
-    if(!Eleccion(seleccion))return;
-    *respaldo = Nivel_de_Luminicencia(respaldo->id_Color,nivel);
-    if(aplicar) Cambiar(*respaldo);}
 
 
 void SuperColor::ConstruirColores(){
@@ -221,6 +246,7 @@ void SuperColor::ConstruirColores(){
     if(hay_gamas && Gamas == nullptr){
         ConstruirGamas();}}
 
+
 void SuperColor::ConstruirGamas(){
     if(Gamas != nullptr) return;
     Gamas = new RGB*[13];
@@ -240,78 +266,106 @@ void SuperColor::ConstruirGamas(){
     for(short i = 7; i < 13; i += 2){
         respaldo = new RGB;
         *respaldo = Suma_deColor(Gamas[i-1]->id_Color,Gamas[i+1]->id_Color,DERECHA);
-        Gamas[i] = respaldo;}
-}
+        Gamas[i] = respaldo;}}
+
+
 RGB *SuperColor::Color_selecionado(short color){
     if(estaVacio) return nullptr;
     es_todo = false;
-
     switch(color){
-        case ORIGINAL:
-            return Original;
-
-        case COMPLEMENTO:
-            return Opuesto;
-
-        case ANALOGO_A:
-            return ContiguoA;
-
-        case ANALOGO_B:
-            return ContiguoB;
-
-        case TRIANGULO_A:
-            return Punta_A;
-
-        case TRIANGULO_B:
-            return Punta_B;
+        case ORIGINAL:    return Original;
+        case COMPLEMENTO: return Opuesto;
+        case ANALOGO_A:   return ContiguoA;
+        case ANALOGO_B:   return ContiguoB;
+        case TRIANGULO_A: return Punta_A;
+        case TRIANGULO_B: return Punta_B;
 
         default: es_todo = true;
                 return nullptr;}}
+
+
+bool SuperColor:: Eleccion(short eleccion){
+    if(eleccion < NEGRO) return false;
+    respaldo = Color_selecionado(eleccion);
+    if(es_todo) return false;
+    if(respaldo == nullptr){
+        CreaColores(eleccion,INTRAQUEABLE);
+        ConstruirColores();
+        respaldo = Color_selecionado(eleccion);}
+    return true;}
+
+
+short recorredor(short dimencion, short indice){
+    if(dimencion < 0) return 0;
+    dimencion -= 1;
+    if(indice < 0){
+        dimencion += indice + 1;
+        if(dimencion < 0)
+            return 0;
+        return  dimencion;}
+
+    if(indice > dimencion) return dimencion;
+    return indice;}
 
 
 void SuperColor::limpiar(){
     reiniciar();
     iniciar();}
 
-std::string SuperColor::Obterner(const short &Tono, const short &Modo){
-    if(estaVacio) return "";
-    respaldo = Color_selecionado(Tono);
-    if(respaldo)
-        return respaldo->obtenerHEX(Modo);
-    return "";}
+
+void SuperColor::Re_Asignar(short eleccion){
+    if(!Eleccion(eleccion))return;
+    Cambiar(respaldo->id_Color);}
 
 
-void SuperColor::CreaColores(short eleccion,short extra){
-    if(estaVacio|| eleccion < 0 || eleccion > TODO ) return;
+void SuperColor::Restableser(){
+    reiniciar();
+    ConstruirColores();}
 
-    if(eleccion & COMPLEMENTO)
-        hay_opuesto   = true;
 
-    if(eleccion & ANALOGO_A){
-        hay_contiguo_A = true;
-        hay_triangulo_B = true;}
+bool SuperColor::Luminicencia(short seleccion,short nivel,bool aplicar){
+    if(!Eleccion(seleccion))return false;
+    *respaldo = Nivel_de_Luminicencia(respaldo->id_Color,nivel);
+    if(aplicar) Cambiar(*respaldo);
+    return true;}
 
-    if(eleccion & ANALOGO_B){
-        hay_contiguo_B = true;
-        hay_triangulo_A = true;}
 
-    if(eleccion & TRIANGULO_A)
-        hay_triangulo_A = true;
+void SuperColor::AplicarCambios(){
+    if(respaldo == nullptr)return;
+    Cambiar(*respaldo);}
 
-    if(eleccion & TRIANGULO_B)
-        hay_triangulo_B = true;
 
-    if(eleccion & GAMA)
+std::string SuperColor::Obterner(const short &Tono, const short &Modo,const short &indice){
+    if(estaVacio || Tono == TODO) return "";
+
+    if(Eleccion(Tono)){
+        return respaldo->obtenerHEX(Modo);}
+
+    if(Tono == GAMA){
+        short i = recorredor(12,indice);
         hay_gamas = true;
+        ConstruirColores();
+        return Gamas[i]->obtenerHEX(Modo);}
 
-    if(extra == MONOCROMO){
-        ColorMonocromo = eleccion;
-        hay_monocromo = true;}
+    if(Tono >= MONOCROMO && Tono < ILUMINAR){
+        short res;
+        if(Tono < SOMBRA){
+            res = Que_color_Es;
+            CreaColores(Tono - BRILLO,MONOCROMO);
+            Que_color_Es = res;
+            return Luz->obtenerHEX(Modo);}
 
-    if(extra != INTRAQUEABLE){
-        Que_color_Es = eleccion;
-        ConstruirColores();}}
+        if(Tono <= SOMBRA + TRIANGULO_B){
+            res = Que_color_Es;
+            CreaColores(Tono - SOMBRA,MONOCROMO);
+            Que_color_Es = res;
+            return Sombra->obtenerHEX(Modo);}
+        return "";}
 
+    if(Tono >= ILUMINAR){
+        if(!Luminicencia(Tono - ILUMINAR,indice)) return "";
+        return respaldo->obtenerHEX(Modo);}
+    return "";}
 
 
 std::ostream &operator<<(std::ostream &o, SuperColor &c){

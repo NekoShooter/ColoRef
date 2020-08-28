@@ -15,16 +15,32 @@ void RGB::limpiar(){
     vacio = true;      }
 
 
-
 RGB::RGB() {
-    vacio = true;
     limpiar();}
+
+RGB::RGB(const std::string &html){
+    limpiar();
+    cambiar(html);}
+
+RGB::RGB(long decimal){
+    limpiar();
+    cambiar(decimal);}
+
+RGB::RGB(const short &rojo,const short &verde,
+         const short &azul){
+    limpiar();
+    if((rojo > 255 || verde > 255 || azul > 255)||
+       (rojo < 0   || verde < 0   || azul < 0)){
+        return;}
+    cambiar(rojo,verde,azul);}
 
 void RGB::operator =(const std::string &html){
     cambiar(html);}
 
 void RGB::operator =(long decimal){
     cambiar(decimal);}
+
+
 
 void RGB::cambiar(const long &decimal){
     if(Convertir_Entero_A_HexaPuro(decimal,Hexa,8) == ERROR)
@@ -41,6 +57,7 @@ void RGB::cambiar(const long &decimal){
     vacio = false;}
 
 
+
 void RGB::cambiar(short rojo,short verde,short azul){
     if(Convertir_RGB_A_Hexadecimal(rojo,verde,azul,Hexa,8)==ERROR)
         return;
@@ -53,6 +70,7 @@ void RGB::cambiar(short rojo,short verde,short azul){
     _CSS = css;
     id_Color = Convertir_RGB_A_Entero(R,G,B);
     vacio = false;}
+
 
 
 void RGB::cambiar(const std::string &html){
@@ -77,7 +95,6 @@ void RGB::cambiar(const std::string &html){
 
 
 
-
 void RGB::cambiar(RGB & rgb){
     if(rgb.vacio)return;
     R = rgb.R;
@@ -89,26 +106,9 @@ void RGB::cambiar(RGB & rgb){
 
 
 
-RGB::RGB(const std::string &html){
-    limpiar();
-    cambiar(html);}
-
-
-
-RGB::RGB(long decimal){
-    limpiar();
-    cambiar(decimal);}
-
-
-
-RGB::RGB(const short &rojo,const short &verde,
-         const short &azul){
-    limpiar();
-    if((rojo > 255 || verde > 255 || azul > 255)||
-       (rojo < 0   || verde < 0   || azul < 0)){
-        return;}
-    cambiar(rojo,verde,azul);}
-
+void RGB::invertir(){
+    respaldar_RGB();
+    cambiar(r,g,b);}
 
 
 short RGB::obtenerRGB(short elemento){
@@ -123,17 +123,10 @@ short RGB::obtenerRGB(short elemento){
 
 std::string RGB::obtenerHEX(short elemento){
     if(vacio) return "";
-    if(elemento == HTML)
-        return Hexadecimal;
-    if(elemento == CSS)
-        return _CSS;
-    else return "";}
-
-
-
-void RGB::invertir(){
-    respaldar_RGB();
-    cambiar(r,g,b);}
+    switch (elemento) {
+        case HTML: return Hexadecimal;
+        case CSS:  return _CSS;
+        default: return "";}}
 
 
 
@@ -141,6 +134,8 @@ bool RGB::operator !=(const RGB &A){
     if(*this == A)
         return false;
     return true;}
+
+
 
 bool RGB::operator ==(const RGB &A){
     if(A.vacio && vacio) return true;

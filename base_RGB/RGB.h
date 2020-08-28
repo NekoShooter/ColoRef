@@ -36,7 +36,7 @@ class RGB
         void cambiar(const std::string &html);
         void cambiar(short rojo,short verde,short azul);
 
-        enum Eleccion{ROJO, VERDE, AZUL, HTML, CSS};
+        enum Eleccion{ROJO, VERDE, AZUL, HTML = 5, CSS = 6};
 
         short obtenerRGB(short elemento = ROJO);
         std::string obtenerHEX(short elemento = HTML);
@@ -54,14 +54,14 @@ class RGB
 
         inline void Desplazar_RGB_Izq(){r = G;  g = B;  b = R;}
         inline void Desplazar_RGB_Der(){r = B;  g = R;  b = G;}
-        inline void Girar_RGB(){r = B;  g = G;  b = R;}
+        inline void Girar_RGB()        {r = B;  g = G;  b = R;}
+        inline void asignar_a_RGB()    {R = r;  G = g;  B = b;}
+        inline void respaldar_RGB()    {r = R;  g = G;  b = B;}
+
         inline void actualizar_HEX(){cambiar(Hexa);}
-        inline void asignar_a_RGB(){R = r; G = g; B = b;}
         inline void actualizar_RGB(){cambiar(r,g,b);}
-        inline void respaldar_RGB(){r = R;  g = G;  b = B;}
 
     private:
-
         long id_Color;
         short R,G,B;
         std::string Hexadecimal;

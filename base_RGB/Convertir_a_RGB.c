@@ -13,7 +13,6 @@ short seccionar_aBytes(long *decimal,short nBytes){
 
 
 
-
 char De_int_a_letra (short valor,unsigned char invertir){
     if(15 < valor || 0 > valor) return INVALIDO;
     if (!invertir){
@@ -111,7 +110,6 @@ short Convertir_Hexadecimal_A_RGB(short *r,short *g,short *b,const char *Hexadec
     long Valor = Convertir_Hexadecimal_A_EnteroPuro(Hexadecimal);
     if(Valor == ERROR) return ERROR;
     return Convertir_Entero_A_RGB(r,g,b,Valor);}
-
 
 
 

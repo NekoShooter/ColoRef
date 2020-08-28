@@ -30,27 +30,30 @@ class SuperColor
         void operator=(long decimal);
 
         std::string Obterner(const short &Tono = ORIGINAL,
-                             const short &Modo = HTML);
+                             const short &Modo = HTML, const short &indice = 6);
 
         void Cambiar(RGB &Color);
         void Cambiar(const std::string &html);
         void Cambiar(const short &rojo,const short &verde,
                      const short &azul,const short alfa = 255);
         void Cambiar(long decimal);
+        void Restableser();
 
         void Re_Asignar(short eleccion);
-        void Luminicencia(short seleccion = ORIGINAL,short nivel = 3,bool aplicar = false);
+        bool Luminicencia(short seleccion = ORIGINAL,short nivel = 3,bool aplicar = false);
 
         void CreaColores(short eleccion = TODO,short extra = NINGUNO);
         void limpiar();
+        void AplicarCambios();
         enum Seleccion{ORIGINAL    = 0,     TRIADA  = 24, GAMA = 32,
                        COMPLEMENTO = 1,     ANALOGO = 6,  NINGUNO = 0,
 
-                       ANALOGO_A   = 2,     TODO = 63,
-                       ANALOGO_B   = 4,     HTML, CSS,
+                       ANALOGO_A   = 2,     TODO = 63,    BRILLO = 64,
+                       ANALOGO_B   = 4,     HTML, CSS,    SOMBRA = 81,
 
                        TRIANGULO_A = 8,     MONOCROMO = 64,
-                       TRIANGULO_B = 16,    INTRAQUEABLE};
+                       TRIANGULO_B = 16,    ILUMINAR  = 98,
+                                            INTRAQUEABLE};
 
         bool EstaVacio(){return estaVacio;}
         friend std::ostream &operator<<(std::ostream &o, SuperColor &c);
@@ -69,9 +72,7 @@ class SuperColor
             *Luz,       *Sombra,
             *respaldo,  **Gamas;
 
-        short Alfa,            Seguro,
-              NumeroDE_Gamas,  Que_color_Es,
-              ColorGama,       ColorMonocromo;
+        short Alfa,   Que_color_Es,  ColorMonocromo;
 
         bool estaVacio,       hay_original,
              tiene_alfa,      hay_opuesto,
