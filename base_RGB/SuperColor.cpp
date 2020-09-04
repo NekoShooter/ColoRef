@@ -368,6 +368,29 @@ std::string SuperColor::Obterner(const short &Tono, const short &Modo,const shor
     return "";}
 
 
+long SuperColor::id(short eleccion)
+{
+    if(!Eleccion(eleccion))return  ERROR;
+    return respaldo->id_Color;
+}
+
+
+bool SuperColor::operator==(SuperColor C){
+    if(estaVacio == C.estaVacio) return true;
+    if(estaVacio != C.estaVacio) return false;
+    return *Original == *C.Original;}
+bool SuperColor::operator!=(SuperColor C){
+    return !(*this == C);}
+
+
+std::string SuperColor::Q_style(const short &Tono, const short &Modo, const short &indice)
+{
+    std::string Qt_styleSheet;
+    Qt_styleSheet = "background-color:";
+    Qt_styleSheet += Obterner(Tono, Modo,indice);
+    return Qt_styleSheet+=";";
+}
+
 std::ostream &operator<<(std::ostream &o, SuperColor &c){
     if(c.estaVacio) return o<<"Color inexistente"<<std::endl;
     o<<"___color_____css___html____R____G____B___"<<std::endl;

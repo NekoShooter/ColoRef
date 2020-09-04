@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>imagenes/bokqet bienvenida.png</file>
+        <file>imagenes/bokqet info.png</file>
+    </qresource>
+</RCC>

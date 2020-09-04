@@ -1,9 +1,16 @@
 #include "interfaz/Principal.h"
-int main()
+#include <QApplication>
+#include <QWidget>
+#include <QSplashScreen>
+#include <QObject>
+#include <QPushButton>
+
+int main(int argc, char **argv)
 {
-
-    char controlador[100];
-    mostrar(controlador);
-
-    return 0;
+    QApplication a(argc, argv);
+    //a.setStyle("fusion");
+    VentanaPrincipal v;
+    v.show();
+    return a.exec();
 }
+

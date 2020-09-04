@@ -28,9 +28,13 @@ class SuperColor
         void operator=(const std::string &html);
         void operator=(RGB &Color);
         void operator=(long decimal);
-
+        bool operator==(SuperColor C);
+        bool operator!=(SuperColor C);
+        std::string Q_style(const short &Tono = ORIGINAL,
+                            const short &Modo = HTML, const short &indice = 6);
         std::string Obterner(const short &Tono = ORIGINAL,
                              const short &Modo = HTML, const short &indice = 6);
+        long id(short eleccion = ORIGINAL);
 
         void Cambiar(RGB &Color);
         void Cambiar(const std::string &html);

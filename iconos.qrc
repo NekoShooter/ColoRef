@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>iconos/agregar.png</file>
+        <file>iconos/Analogos.png</file>
+        <file>iconos/complemento.png</file>
+        <file>iconos/Gama.png</file>
+        <file>iconos/menu.png</file>
+        <file>iconos/monocromo.png</file>
+        <file>iconos/regresar.png</file>
+        <file>iconos/todo.png</file>
+        <file>iconos/triada.png</file>
+    </qresource>
+</RCC>
