@@ -1,5 +1,6 @@
 #include "Algoritmo_RGB.h"
 #include "Convertir_a_RGB.h"
+#include <stdio.h>
 #include "MACROS.h"
 
 short dividir_tono(short Tono, short *Claro, short *Oscuro,double Nivel_Brillo, double Nivel_Oscuro){
@@ -64,7 +65,7 @@ long Suma_deColor(long ColorA, long ColorB,short desplazamiento){
     rgb_C[0] = (rgb_A[ra] + rgb_B[rb])/ CONST_ARTE;
     rgb_C[1] = (rgb_A[ga] + rgb_B[gb])/ CONST_ARTE;
     rgb_C[2] = (rgb_A[ba] + rgb_B[bb])/ CONST_ARTE;
-    return (BLANCO - Convertir_RGB_A_Entero(rgb_C[0],rgb_C[1],rgb_C[2]));}
+    return Convertir_RGB_A_Entero(rgb_C[0],rgb_C[1],rgb_C[2]);}
 
 
 long Nivel_de_Luminicencia(long Color,short intencidad){
@@ -84,3 +85,26 @@ long Nivel_de_Luminicencia(long Color,short intencidad){
     if(g > 255) g = 255;
     if(b > 255) b = 255;
     return Convertir_RGB_A_Entero(r,g,b);}
+
+
+
+long Nivelacion_Complementaria(long ColorOriginal){
+    if(ColorOriginal > BLANCO || ColorOriginal < NEGRO) return ERROR;
+    long ColorComplementario = BLANCO - ColorOriginal;
+    return Nivelacion_Luminica(ColorOriginal,ColorComplementario);}
+
+long Nivelacion_Luminica(long ColorOriginal,long ColorBase){
+    short RGB_A[3], MAX_A,
+          RGB_B[3], MAX_B;
+
+    Convertir_Entero_A_RGB(&RGB_A[0],&RGB_A[1],&RGB_A[2],ColorOriginal);
+    Convertir_Entero_A_RGB(&RGB_B[0],&RGB_B[1],&RGB_B[2],ColorBase);
+    MAX_A = RGB_A[0];
+    MAX_B = RGB_B[0];
+
+    short i;
+    for(i = 0; i < 3; ++i){
+        if(MAX_A < RGB_A[i]) MAX_A = RGB_A[i];
+        if(MAX_B < RGB_B[i]) MAX_B = RGB_B[i];}
+    return Nivel_de_Luminicencia(ColorBase, MAX_A - MAX_B);
+}

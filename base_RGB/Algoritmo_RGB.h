@@ -23,6 +23,8 @@ short Brillo_y_Sombra(long Color,long *Brillo, long *Sombra, double Nivel_Brillo
 
 long Suma_deColor(long ColorA, long ColorB,short desplazamiento);
 long Nivel_de_Luminicencia(long Color,short intencidad);
+long Nivelacion_Complementaria(long ColorOriginal);
+long Nivelacion_Luminica(long ColorA,long ColorB);
 
 #ifdef __cplusplus
 }

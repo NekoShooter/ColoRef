@@ -1,5 +1,4 @@
-/*
-ColoRef - Color Theory Software
+/*ColoRef - Color Theory Software
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -13,6 +12,19 @@ GNU General Public License for more details.
 #ifndef SUPERCOLOR_H
 #define SUPERCOLOR_H
 #include "RGB.h"
+
+
+namespace SuperColorStd {
+enum Seleccion{ORIGINAL    = 0,     TRIADA  = 24, GAMA = 32,
+               COMPLEMENTO = 1,     ANALOGO = 6,  NINGUNO = 0,
+
+               ANALOGO_A   = 2,     TODO = 63,    BRILLO = 64,
+               ANALOGO_B   = 4,     HTML, CSS,    SOMBRA = 81,
+
+               TRIANGULO_A = 8,     MONOCROMO = 64,
+               TRIANGULO_B = 16,    ILUMINAR  = 98,
+                                    INTRAQUEABLE};}
+
 
 class SuperColor
 {
@@ -30,11 +42,11 @@ class SuperColor
         void operator=(long decimal);
         bool operator==(SuperColor C);
         bool operator!=(SuperColor C);
-        std::string Q_style(const short &Tono = ORIGINAL,
-                            const short &Modo = HTML, const short &indice = 6);
-        std::string Obterner(const short &Tono = ORIGINAL,
-                             const short &Modo = HTML, const short &indice = 6);
-        long id(short eleccion = ORIGINAL);
+        std::string Q_style(const short &Tono = SuperColorStd::ORIGINAL,
+                            const short &Modo = SuperColorStd::HTML, const short &indice = 6);
+        std::string Obterner(const short &Tono = SuperColorStd::ORIGINAL,
+                             const short &Modo = SuperColorStd::HTML, const short &indice = 6);
+        long id(short eleccion = SuperColorStd::ORIGINAL);
 
         void Cambiar(RGB &Color);
         void Cambiar(const std::string &html);
@@ -44,20 +56,11 @@ class SuperColor
         void Restableser();
 
         void Re_Asignar(short eleccion);
-        bool Luminicencia(short seleccion = ORIGINAL,short nivel = 3,bool aplicar = false);
+        bool Luminicencia(short seleccion = SuperColorStd::ORIGINAL,short nivel = 3,bool aplicar = false);
 
-        void CreaColores(short eleccion = TODO,short extra = NINGUNO);
+        void CreaColores(short eleccion = SuperColorStd::TODO,short extra = SuperColorStd::NINGUNO);
         void limpiar();
         void AplicarCambios();
-        enum Seleccion{ORIGINAL    = 0,     TRIADA  = 24, GAMA = 32,
-                       COMPLEMENTO = 1,     ANALOGO = 6,  NINGUNO = 0,
-
-                       ANALOGO_A   = 2,     TODO = 63,    BRILLO = 64,
-                       ANALOGO_B   = 4,     HTML, CSS,    SOMBRA = 81,
-
-                       TRIANGULO_A = 8,     MONOCROMO = 64,
-                       TRIANGULO_B = 16,    ILUMINAR  = 98,
-                                            INTRAQUEABLE};
 
         bool EstaVacio(){return estaVacio;}
         friend std::ostream &operator<<(std::ostream &o, SuperColor &c);
