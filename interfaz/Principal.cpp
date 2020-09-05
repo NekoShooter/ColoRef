@@ -204,9 +204,7 @@ void VentanaPrincipal::Area_de_seleccion(short i)
 void VentanaPrincipal::Original(){
     indice_dela_arquitectura = 0;
     imagen->clear();
-    if(regresar){
-        Acerca_De();
-        return;}
+    if(regresar){ Acerca_De(); return;}
     ocultar();
     imagen->setGeometry(230,50,200,200);
     imagen->setStyleSheet("Background-color:"+Colores[6].name()+";");
@@ -470,12 +468,12 @@ void VentanaPrincipal::Acerca_De()
     if(cambioElTexto){
         info->setText("Soy ColoRef y me encantara poder ayudarte a elegir "
                       "uno o varios colores para tu proyecto\n"
-                      "Mi padre \"Marco Antonio\" me creo usando "
-                      "C ,C++ y QT para la interfaz visual\n"
-                      "\'Aunque no estoy terminada y mi padre aun me sigue "
-                      "mejorando espero poder ser te de utilidad\'\n\n"
+                      "Mi Padre \"Marco Antonio\" creo mi algortimo usando "
+                      "C y C++ y para la interfaz visual QT\n"
+                      "\'Papá aun me sigue mejorando y aunque no estoy "
+                      "completa espero poder ser te de utilidad\'\n\n"
                       "Estoy bajo la lincencia\n"
-                      "GNU General Public License\n"
+                      "GNU General Public License -version 3-\n"
                       "\nSi deseas colaborar o buscar actualizaciones me encuetras en\n"
                       "https://github.com/NekoShooter/ColorRef\n\n"
                       "ColoRef -- Version -- bokqet 1.0");

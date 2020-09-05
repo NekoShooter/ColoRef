@@ -1,9 +1,5 @@
-#include "interfaz/Principal.h"
 #include <QApplication>
-#include <QWidget>
-#include <QSplashScreen>
-#include <QObject>
-#include <QPushButton>
+#include "interfaz/Principal.h"
 
 int main(int argc, char **argv)
 {
