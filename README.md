@@ -26,4 +26,4 @@ Inspirada en la [famosa teoría del color](https://es.wikipedia.org/wiki/Teoría
 
  version | descarga 
   --- | ---
- monocromo 0.0 | [.exe](https://mega.nz/file/RgBVRYpJ#_GdBhhNPqfn32tNVp_hIM771uWIWmgpR4ThipoNuZzo)       [codigo](https://github.com/NekoShooter/ColorRef/releases/tag/monocromo-v0.0)
+ monocromo 0.0 | [.exe](https://github.com/NekoShooter/descargas/blob/master/ColoRef.exe?raw=true)       [codigo](https://github.com/NekoShooter/ColorRef/releases/tag/monocromo-v0.0)
