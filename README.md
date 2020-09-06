@@ -6,7 +6,7 @@ Inspirada en la [famosa teoría del color](https://es.wikipedia.org/wiki/Teoría
 
 
 <p align="center">
-<a href="#"><img src="https://media.giphy.com/media/Wrs1KvPON1k6fNMMQC/giphy.gif" alt="creando paleta de colores" ></a>
+<a href="#"><img src="https://media.giphy.com/media/Wrs1KvPON1k6fNMMQC/giphy.gif" alt="creando paleta de colores"></a>
 <p/>
 
 <h2 align="center">ColoRef -- version Bokqet 1.0 --</h2>
@@ -14,11 +14,8 @@ Inspirada en la [famosa teoría del color](https://es.wikipedia.org/wiki/Teoría
 
 <p align="center">Esta es una aplicacion basada en el circulo cromatico cuya funcion es basica, solo ingresas el color de tu preferencia en notacion HTML o CSS y la aplicacion te dara una selecion de colores adecuada segun tu eleccion:<p/>
 
-<p align="center"><a href="https://es.wikipedia.org/wiki/Color_monocromáticos"><b>Brillo y Sombra (monocomo)<a/><b/><p/>
-<p align="center"><a href="https://es.wikipedia.org/wiki/Colores_complementarios"><b>Complemento<a/><b/><p/>
-<p align="center"><a href="https://es.wikipedia.org/wiki/Colores_análogos"><b>Analogos<a/><b/><p/>
-<p align="center"><a href="https://www.google.com/search?client=opera&sxsrf=ALeKk03qt_gTf4YKuNa8NB0dE9CVRdVrng%3A1598057689378&ei=2WxAX7TJFsKFtQaJ-YfoDA&q=triada+color&oq=triada+color&gs_lcp=CgZwc3ktYWIQDDIHCAAQFBCHAjICCAAyBggAEAcQHjIGCAAQBxAeMgYIABAHEB4yBggAEAcQHjIGCAAQBxAeMgYIABAHEB4yBggAEAcQHjIGCAAQBxAeOgQIABBHOgQIABBDOggIABAHEAoQHlCtEFirF2DOJGgAcAF4AIABgwGIAeYFkgEDMC42mAEAoAEBqgEHZ3dzLXdpesABAQ&sclient=psy-ab&ved=0ahUKEwj0mZ_nzK3rAhXCQs0KHYn8Ac0Q4dUDCAs"><b>Triada<a/><b/><p/>
-<p align="center"><a href="https://es.wikipedia.org/wiki/Gama_de_color"><b>Gamas<b/><a/><p/>
+<a herf="#"><img src="https://github.com/NekoShooter/ColorRef/blob/master/iconos/monocromo.png" width="30"><a/>   [Brillo y Sombra](https://es.wikipedia.org/wiki/Color_monocromáticos) | <a herf="#"><img src="https://github.com/NekoShooter/ColorRef/blob/master/iconos/complemento.png" width="20"><a/>   [Complemento](https://es.wikipedia.org/wiki/Colores_complementarios) | <a herf="#"><img src="https://github.com/NekoShooter/ColorRef/blob/master/iconos/Analogos.png" width="20"><a/>   [Analogos](https://es.wikipedia.org/wiki/Colores_análogos) | <a herf="#"><img src="https://github.com/NekoShooter/ColorRef/blob/master/iconos/triada.png" width="20"><a/>   [Triada](https://www.google.com/search?client=opera&sxsrf=ALeKk03qt_gTf4YKuNa8NB0dE9CVRdVrng%3A1598057689378&ei=2WxAX7TJFsKFtQaJ-YfoDA&q=triada+color&oq=triada+color&gs_lcp=CgZwc3ktYWIQDDIHCAAQFBCHAjICCAAyBggAEAcQHjIGCAAQBxAeMgYIABAHEB4yBggAEAcQHjIGCAAQBxAeMgYIABAHEB4yBggAEAcQHjIGCAAQBxAeOgQIABBHOgQIABBDOggIABAHEAoQHlCtEFirF2DOJGgAcAF4AIABgwGIAeYFkgEDMC42mAEAoAEBqgEHZ3dzLXdpesABAQ&sclient=psy-ab&ved=0ahUKEwj0mZ_nzK3rAhXCQs0KHYn8Ac0Q4dUDCAs) | <a herf="#"><img src="https://github.com/NekoShooter/ColorRef/blob/master/iconos/Gama.png" width="25"><a/>   [Gamas](https://es.wikipedia.org/wiki/Gama_de_color) | <a herf="#"><img src="https://github.com/NekoShooter/ColorRef/blob/master/iconos/todo.png" width="20"><a/>   [Paleta Completa](https://github.com/NekoShooter/ColorRef#coloref)
+  --- | --- | --- | --- | --- | ---
 
  Version | Descargar | Descargar | Construido en
   --- | --- | --- | ---
