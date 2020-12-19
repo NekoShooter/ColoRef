@@ -395,7 +395,6 @@ void VentanaPrincipal::Actualizar(SuperColor *COLOR){
     if(COLOR->EstaVacio()){
         Entrada_de_color->clear();
         return;}
-    if(Colores[0].name() == COLOR->Obterner().c_str())return;
     cargarColores(COLOR);
     if(!Seguro) Arrancar();
     mostrarSalida(6,false);
