@@ -6,6 +6,8 @@
 #include <QLineEdit>
 #include <QLabel>
 #include <QSpinBox>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 //#include <QSplashScreen>
 
 #define ALTURA 420
@@ -47,6 +49,13 @@ void VentanaPrincipal::Conectores_Principales(){
 
 #define _L 90
 #define _A 70
+QPushButton *boton(QVBoxLayout **vertical,QMainWindow **ventanaPrincipal){
+    QPushButton *BOTON;
+    BOTON = new QPushButton(ventanaPrincipal[0]);
+    vertical[0]->addWidget(BOTON);
+    BOTON->show();
+    return BOTON;
+}
 void VentanaPrincipal::Maquetado_Principal(){
     Menu->setGeometry(530,350,70,_A);
     Menu->show();
