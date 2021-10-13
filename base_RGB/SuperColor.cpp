@@ -2,7 +2,7 @@
 #include "Algoritmo_RGB.h"
 #include "MACROS.h"
 //#include <iostream>
-
+using namespace SuperColorStd;
 
 void SuperColor::iniciar(){
     estaVacio       = true;
@@ -209,7 +209,7 @@ void SuperColor::ConstruirColores(){
 
     if(hay_opuesto && Opuesto == nullptr){
         Opuesto = new RGB;
-        *Opuesto = BLANCO - Original->id_Color;}
+        *Opuesto = Nivelacion_Complementaria(Original->id_Color);}
 
     if (hay_triangulo_A && Punta_A == nullptr){
         Punta_A = new RGB;
@@ -225,11 +225,11 @@ void SuperColor::ConstruirColores(){
 
     if(hay_contiguo_A && ContiguoA == nullptr){
         ContiguoA = new RGB;
-        *ContiguoA = BLANCO - Punta_B->id_Color;}
+        *ContiguoA =Nivelacion_Complementaria(Punta_B->id_Color);}
 
     if(hay_contiguo_B && ContiguoB == nullptr){
         ContiguoB = new RGB;
-        *ContiguoB = BLANCO - Punta_A->id_Color;}
+        *ContiguoB = Nivelacion_Complementaria(Punta_A->id_Color);}
 
     if(hay_monocromo){
         long brillo, oscuro;
@@ -259,14 +259,14 @@ void SuperColor::ConstruirGamas(){
     Gamas[8] = ContiguoA;
     Gamas[10] = Punta_A;
     Gamas[12] = Opuesto;
-    for(short i = 5; i > 0; i -= 2){
+    for(short i = 5,j = 11; i > 0; i -= 2 ,j -=2){
         respaldo = new RGB;
         *respaldo =Suma_deColor(Gamas[i+1]->id_Color,Gamas[i-1]->id_Color,IZQUIERDA);
-        Gamas[i] = respaldo;}
-    for(short i = 7; i < 13; i += 2){
+        Gamas[j] = respaldo;}
+    for(short i = 7,j = 1; i < 13; i += 2, j += 2){
         respaldo = new RGB;
         *respaldo = Suma_deColor(Gamas[i-1]->id_Color,Gamas[i+1]->id_Color,DERECHA);
-        Gamas[i] = respaldo;}}
+        Gamas[j] = respaldo;}}
 
 
 RGB *SuperColor::Color_selecionado(short color){
@@ -402,22 +402,22 @@ std::ostream &operator<<(std::ostream &o, SuperColor &c){
     if(c.hay_monocromo && c.Sombra)
         o<<"   Sombra   "<<*c.Sombra;
 
-    if((c.Que_color_Es & c.COMPLEMENTO) && c.hay_opuesto)
+    if((c.Que_color_Es & COMPLEMENTO) && c.hay_opuesto)
         o<<"Complemento "<<*c.Opuesto;
 
-    if((c.Que_color_Es & c.ANALOGO_A) && c.hay_contiguo_A)
+    if((c.Que_color_Es & ANALOGO_A) && c.hay_contiguo_A)
         o<<"Adyasente A "<<*c.ContiguoA;
 
-    if((c.Que_color_Es & c.ANALOGO_B) && c.hay_contiguo_B)
+    if((c.Que_color_Es & ANALOGO_B) && c.hay_contiguo_B)
         o<<"Adyasente B "<<*c.ContiguoB;
 
-    if((c.Que_color_Es & c.TRIANGULO_A) && c.hay_triangulo_A)
+    if((c.Que_color_Es & TRIANGULO_A) && c.hay_triangulo_A)
         o<<"  Triada  A "<<*c.Punta_A;
 
-    if((c.Que_color_Es & c.TRIANGULO_B) && c.hay_triangulo_B)
+    if((c.Que_color_Es & TRIANGULO_B) && c.hay_triangulo_B)
         o<<"  Triada  B "<<*c.Punta_B;
 
-    if((c.Que_color_Es & c.GAMA) && c.hay_gamas && c.Gamas != nullptr){
+    if((c.Que_color_Es & GAMA) && c.hay_gamas && c.Gamas != nullptr){
         o<<std::endl<<"___gamas_____css___html____R____G____B___"<<std::endl;
         for(short i = 0; i < 6; ++i)
             o<<"     ^^     "<<*c.Gamas[i];

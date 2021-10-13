@@ -1,15 +1,15 @@
-/*
-ColoRef - Color Theory Software
+/*                           - ColoRef -
+                    Software de la teoría del color
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; version 3 of the License.
+      Este programa es un software libre; puedes redistribuirlo y/o
+     modificarlo bajo los términos de la Licencia Pública General GNU
+según lo publicado por la Free Software Foundation; versión 3 de la Licencia.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-*/
+      Este programa se distribuye con la esperanza de que sea útil,
+    pero SIN NINGUNA GARANTÍA; sin siquiera la garantía implícita de
+     COMERCIABILIDAD o APTITUD PARA UN PROPÓSITO PARTICULAR. Ver la
+       Licencia pública general GNU para obtener más detalles.          */
+
 #ifndef RGB_H
 #define RGB_H
 #include <iostream>

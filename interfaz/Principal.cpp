@@ -13,6 +13,9 @@
 #define ALTURA 420
 #define LARGO 600
 
+using namespace SuperColorStd;
+
+
 VentanaPrincipal::VentanaPrincipal()
 {
     Pantalla_de_Bievenida();
@@ -210,9 +213,7 @@ void VentanaPrincipal::Area_de_seleccion(short i)
 void VentanaPrincipal::Original(){
     indice_dela_arquitectura = 0;
     imagen->clear();
-    if(regresar){
-        Acerca_De();
-        return;}
+    if(regresar){ Acerca_De(); return;}
     ocultar();
     imagen->setGeometry(230,50,200,200);
     imagen->setStyleSheet("Background-color:"+Colores[6].name()+";");
@@ -268,6 +269,7 @@ void VentanaPrincipal::Gamificar(){
 void VentanaPrincipal::Muestra_todo()
 {   Area_de_seleccion(6);
     if(regresar){ Acerca_De(); return;}
+    if(!imagen->isHidden()) imagen->setHidden(true);
     short a = 55;
     short b = 35;
     short c = 35;
@@ -328,6 +330,7 @@ void VentanaPrincipal::anular(){
 
 void VentanaPrincipal::ocultar(){
     if(!info->isHidden()) info->setHidden(true);
+    if(!imagen->isHidden()) imagen->setHidden(true);
     for(short i = 0; i < 14; ++i){
         if(!C[i]->isHidden())
         C[i]->setHidden(true);}
@@ -438,12 +441,12 @@ void VentanaPrincipal::EntradaB(int b){
 
 void VentanaPrincipal::cargarColores(SuperColor*COLOR){
     for(short i = 0;i<12;++i){
-        Colores[i].setNamedColor(COLOR->Obterner(COLOR->GAMA,COLOR->HTML,i).c_str());
-        CSS[i] = COLOR->Obterner(COLOR->GAMA,COLOR->CSS,i).c_str();}
-    Colores[12].setNamedColor(COLOR->Obterner(COLOR->ORIGINAL+COLOR->SOMBRA).c_str());
-    Colores[13].setNamedColor(COLOR->Obterner(COLOR->ORIGINAL+COLOR->BRILLO).c_str());
-    CSS[12] = COLOR->Obterner(COLOR->ORIGINAL+COLOR->SOMBRA,COLOR->CSS).c_str();
-    CSS[13] = COLOR->Obterner(COLOR->ORIGINAL+COLOR->BRILLO,COLOR->CSS).c_str();
+        Colores[i].setNamedColor(COLOR->Obterner(GAMA,HTML,i).c_str());
+        CSS[i] = COLOR->Obterner(GAMA,SuperColorStd::CSS,i).c_str();}
+    Colores[12].setNamedColor(COLOR->Obterner(ORIGINAL+SOMBRA).c_str());
+    Colores[13].setNamedColor(COLOR->Obterner(ORIGINAL+BRILLO).c_str());
+    CSS[12] = COLOR->Obterner(ORIGINAL+SOMBRA,SuperColorStd::CSS).c_str();
+    CSS[13] = COLOR->Obterner(ORIGINAL+BRILLO,SuperColorStd::CSS).c_str();
     if(C[0]== nullptr){
         for(short i = 0; i <14; ++i){
             C[i]=new QPushButton(this);}}
@@ -473,12 +476,12 @@ void VentanaPrincipal::Acerca_De()
     if(cambioElTexto){
         info->setText("Soy ColoRef y me encantara poder ayudarte a elegir "
                       "uno o varios colores para tu proyecto\n"
-                      "Mi padre \"Marco Antonio\" creo mi algoritmo "
-                      "en C y C++ para la interfaz visual uso QT\n"
-                      "\'Aunque no estoy terminada y mi padre aun me sigue "
-                      "mejorando espero ser te de utilidad\'\n\n"
+                      "Mi Padre \"Marco Antonio\" creo mi algortimo usando "
+                      "C y C++ y para la interfaz visual QT\n"
+                      "\'Papá aun me sigue mejorando y aunque no estoy "
+                      "completa espero poder ser te de utilidad\'\n\n"
                       "Estoy bajo la lincencia\n"
-                      "GNU General Public License\n"
+                      "GNU General Public License -version 3-\n"
                       "\nSi deseas colaborar o buscar actualizaciones me encuetras en\n"
                       "https://github.com/NekoShooter/ColorRef\n\n"
                       "ColoRef -- Version -- bokqet 1.0");

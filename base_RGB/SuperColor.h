@@ -1,18 +1,31 @@
-/*
-ColoRef - Color Theory Software
+/*                           - ColoRef -
+                    Software de la teoría del color
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; version 3 of the License.
+      Este programa es un software libre; puedes redistribuirlo y/o
+     modificarlo bajo los términos de la Licencia Pública General GNU
+según lo publicado por la Free Software Foundation; versión 3 de la Licencia.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-*/
+      Este programa se distribuye con la esperanza de que sea útil,
+    pero SIN NINGUNA GARANTÍA; sin siquiera la garantía implícita de
+     COMERCIABILIDAD o APTITUD PARA UN PROPÓSITO PARTICULAR. Ver la
+       Licencia pública general GNU para obtener más detalles.          */
+
 #ifndef SUPERCOLOR_H
 #define SUPERCOLOR_H
 #include "RGB.h"
+
+
+namespace SuperColorStd {
+enum Seleccion{ORIGINAL    = 0,     TRIADA  = 24, GAMA = 32,
+               COMPLEMENTO = 1,     ANALOGO = 6,  NINGUNO = 0,
+
+               ANALOGO_A   = 2,     TODO = 63,    BRILLO = 64,
+               ANALOGO_B   = 4,     HTML, CSS,    SOMBRA = 81,
+
+               TRIANGULO_A = 8,     MONOCROMO = 64,
+               TRIANGULO_B = 16,    ILUMINAR  = 98,
+                                    INTRAQUEABLE};}
+
 
 class SuperColor
 {
@@ -30,11 +43,11 @@ class SuperColor
         void operator=(long decimal);
         bool operator==(SuperColor C);
         bool operator!=(SuperColor C);
-        std::string Q_style(const short &Tono = ORIGINAL,
-                            const short &Modo = HTML, const short &indice = 6);
-        std::string Obterner(const short &Tono = ORIGINAL,
-                             const short &Modo = HTML, const short &indice = 6);
-        long id(short eleccion = ORIGINAL);
+        std::string Q_style(const short &Tono = SuperColorStd::ORIGINAL,
+                            const short &Modo = SuperColorStd::HTML, const short &indice = 6);
+        std::string Obterner(const short &Tono = SuperColorStd::ORIGINAL,
+                             const short &Modo = SuperColorStd::HTML, const short &indice = 6);
+        long id(short eleccion = SuperColorStd::ORIGINAL);
 
         void Cambiar(RGB &Color);
         void Cambiar(const std::string &html);
@@ -44,20 +57,11 @@ class SuperColor
         void Restableser();
 
         void Re_Asignar(short eleccion);
-        bool Luminicencia(short seleccion = ORIGINAL,short nivel = 3,bool aplicar = false);
+        bool Luminicencia(short seleccion = SuperColorStd::ORIGINAL,short nivel = 3,bool aplicar = false);
 
-        void CreaColores(short eleccion = TODO,short extra = NINGUNO);
+        void CreaColores(short eleccion = SuperColorStd::TODO,short extra = SuperColorStd::NINGUNO);
         void limpiar();
         void AplicarCambios();
-        enum Seleccion{ORIGINAL    = 0,     TRIADA  = 24, GAMA = 32,
-                       COMPLEMENTO = 1,     ANALOGO = 6,  NINGUNO = 0,
-
-                       ANALOGO_A   = 2,     TODO = 63,    BRILLO = 64,
-                       ANALOGO_B   = 4,     HTML, CSS,    SOMBRA = 81,
-
-                       TRIANGULO_A = 8,     MONOCROMO = 64,
-                       TRIANGULO_B = 16,    ILUMINAR  = 98,
-                                            INTRAQUEABLE};
 
         bool EstaVacio(){return estaVacio;}
         friend std::ostream &operator<<(std::ostream &o, SuperColor &c);
